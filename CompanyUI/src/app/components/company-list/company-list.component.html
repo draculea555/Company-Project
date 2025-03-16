@@ -1,0 +1,98 @@
+<div class="container mt-4">
+  <h2>Company List</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ISIN</th>
+        <th>Exchange</th>
+        <th>Ticker</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let company of companies">
+        <td>{{ company.id }}</td>
+        <td>{{ company.name }}</td>
+        <td>{{ company.isin }}</td>
+        <td>{{ company.exchange }}</td>
+        <td>{{ company.ticker }}</td>
+        <td>{{ company.website }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="mt-4">Create New Company</h3>
+  <form (ngSubmit)="createCompany()">
+    <input type="text" [(ngModel)]="newCompany.name" name="name" placeholder="Company Name" class="form-control mb-2" required>
+    <input type="text" [(ngModel)]="newCompany.isin" name="isin" placeholder="ISIN" class="form-control mb-2" required>
+    <input type="text" [(ngModel)]="newCompany.exchange" name="exchange" placeholder="Exchange" class="form-control mb-2" required>
+    <input type="text" [(ngModel)]="newCompany.ticker" name="ticker" placeholder="Ticker" class="form-control mb-2" required>
+    <input type="text" [(ngModel)]="newCompany.website" name="website" placeholder="Website" class="form-control mb-2">
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+
+  <h3 class="mt-4">Update Website</h3>
+  <form (ngSubmit)="updateWebsite()">
+    <input type="number" [(ngModel)]="updateWebsiteData.id" name="id" placeholder="Company ID" class="form-control mb-2" required>
+    <input type="text" [(ngModel)]="updateWebsiteData.website" name="website" placeholder="New Website" class="form-control mb-2" required>
+    <button type="submit" class="btn btn-warning">Update</button>
+  </form>
+
+  <h3 class="mt-4">Retrieve Company by Id</h3>
+  <form (ngSubmit)="getCompanyById(companyById.id)">
+    <input type="text" [(ngModel)]="companyById.id" name="id" placeholder="Company ID" class="form-control mb-2" required>
+    <button type="submit" class="btn btn-warning">Get by Id</button>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ISIN</th>
+        <th>Exchange</th>
+        <th>Ticker</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ companyById.id }}</td>
+        <td>{{ companyById.name }}</td>
+        <td>{{ companyById.isin }}</td>
+        <td>{{ companyById.exchange }}</td>
+        <td>{{ companyById.ticker }}</td>
+        <td>{{ companyById.website }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="mt-4">Retrieve Company by Isin</h3>
+  <form (ngSubmit)="getCompanyByIsin()">
+    <input type="text" [(ngModel)]="companyByIsin.isin" name="isin" placeholder="Company Isin" class="form-control mb-2" required>
+    <button type="submit" class="btn btn-warning">Get by Isin</button>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>ISIN</th>
+        <th>Exchange</th>
+        <th>Ticker</th>
+        <th>Website</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ companyByIsin.id }}</td>
+        <td>{{ companyByIsin.name }}</td>
+        <td>{{ companyByIsin.isin }}</td>
+        <td>{{ companyByIsin.exchange }}</td>
+        <td>{{ companyByIsin.ticker }}</td>
+        <td>{{ companyByIsin.website }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

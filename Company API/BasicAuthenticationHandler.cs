@@ -9,12 +9,16 @@ namespace Company_API
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
+        private readonly IConfiguration _configuration;
         public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
                                           ILoggerFactory logger,
                                           System.Text.Encodings.Web.UrlEncoder encoder,
-                                          Microsoft.AspNetCore.Authentication.ISystemClock clock)
+                                          Microsoft.AspNetCore.Authentication.ISystemClock clock,
+                                          IConfiguration configuration)
             : base(options, logger, encoder, clock)
-        { }
+        {
+            _configuration = configuration;
+        }
 
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
@@ -38,8 +42,7 @@ namespace Company_API
             var username = decodedCredentials[0];
             var password = decodedCredentials[1];
 
-            // Validate the username and password (this is just an example, replace with your own logic)
-            if (username == "admin" && password == "password") // Example validation
+            if (username == _configuration["ApiSecurity:User"] && password == _configuration["ApiSecurity:Password"])
             {
                 var claims = new[] { new Claim(ClaimTypes.Name, username) };
                 var identity = new ClaimsIdentity(claims, "BasicAuthentication");
